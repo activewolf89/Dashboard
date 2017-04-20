@@ -1,0 +1,34 @@
+@{
+    @using Dashboard.Models;
+}
+@model Dashboard.Models.UserViewValidation
+<h2>@ViewData["GotStatus"] </h2>
+<h1>Add a new user</h1>
+<button onclick="location.href = '/dashboard/admin'">Return to Dashboard </button>
+<fieldset id = "Registration">
+    <legend> Admin Direct User Creation </legend>
+<form asp-controller="Admin" asp-action="updateadduser" method="post">
+    
+    <label asp-for="FirstName"></label>
+    <input asp-for="FirstName"/>
+    <span asp-validation-for="FirstName"></span>
+
+    <label asp-for="LastName"></label>
+    <input asp-for="LastName"/>
+    <span asp-validation-for="LastName"></span>
+    
+    <label asp-for="Email"></label>
+    <input asp-for="Email"/>
+    <span asp-validation-for="Email"></span>
+    
+    <label asp-for="Password"></label>
+    <input asp-for="Password"/>
+    <span asp-validation-for="Password"></span>
+
+    <label asp-for="ConfirmationPassword"></label>
+    <input asp-for="ConfirmationPassword"/>
+    <span asp-validation-for="ConfirmationPassword"></span>
+    <button type="submit">Register</button>
+</form>
+</fieldset>
+

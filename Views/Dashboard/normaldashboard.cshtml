@@ -1,0 +1,25 @@
+@{
+    @using Dashboard.Models;
+}
+<h1> Dashboard </h1> 
+<hr> 
+<table>
+    <tr>
+        <th> ID </th>
+        <th> Name </th>
+        <th> email </th>
+        <th> created_at </th>
+        <th> user_level </th>
+
+    </tr> 
+    @foreach(User aUser in @ViewBag.myUserList)
+    {
+        <tr>
+            <td> @aUser.UserId </td>
+            <td><a href = "/users/show/@aUser.UserId">@aUser.FirstName @aUser.LastName</a></td>
+            <td>@aUser.Email </td>
+            <td>@aUser.Created_At </td>
+            <td>@aUser.App_Level </td>
+        </tr>
+    }
+</table>

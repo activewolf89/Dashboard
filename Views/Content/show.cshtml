@@ -1,0 +1,14 @@
+@model Dashboard.Models.User
+<h1> @ViewBag.aUser.FirstName @ViewBag.aUser.LastName </h1>
+<h2> @ViewData["error"] </h2>
+<p> Registered at: @ViewBag.aUser.Created_At.ToString("MMM/dd/yyyy")</p>
+<p> User ID: @ViewBag.aUser.UserId</p>
+<p> Email address: @ViewBag.aUser.Email</p> 
+<p> Description: @ViewBag.aUser.Description </p> 
+<h4> Leave a message for @ViewBag.aUser.FirstName </h4> 
+<form method = "post" action = "/message/@ViewBag.aUser.UserId">
+    <textarea rows="4" cols="50"  name = "myMessage"> </textarea>
+    <input type = "submit" value = "Post">
+
+</form>
+@Html.Partial("messages")

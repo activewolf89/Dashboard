@@ -1,0 +1,15 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+@if(ViewData["admin"] == "admin")
+{
+
+@Html.Partial("admindashboard")
+}
+else 
+{
+@Html.Partial("normaldashboard")
+
+}
+
+

@@ -1,0 +1,73 @@
+@{
+    @using Dashboard.Models
+}
+@model Dashboard.Models.Message
+@{
+ foreach(Message aMessage in @ViewBag.myMessageList)
+ {
+     
+         DateTime createdMessageDate = @aMessage.Created_At;
+         DateTime rightNow = DateTime.Now; 
+         TimeSpan span = (rightNow - createdMessageDate);
+         
+     
+     if(@aMessage.MessageReceiverId ==  @ViewBag.aUser.UserId)
+     {
+    if(@span.Days < 1)
+    {
+        if(@span.Hours < 1 && span.Minutes >= 1)
+        {
+            <p><h3> @span.Minutes minutes ago</h3></p>  
+        }
+        else
+        {
+                <p><h3> Just Now </h3></p> 
+        }
+    }
+    else 
+    {
+    <p> @aMessage.Created_At.ToString("MMM dd yyyy") </p>
+    }
+    
+    <p> <a href = "/users/show/@aMessage.UserId">@aMessage.User.FirstName</a> wrote-----@aMessage.MessageConversation </p>
+    <hr>
+     <form method = "post" action = "/comment/@aMessage.MessageId"> 
+        <textarea rows="4" cols="50" name = "comment_area"> </textarea> 
+        <input type = "submit" value = "Post Comment">
+            <input type = "hidden" value = @aMessage.MessageReceiverId name = "MessageWallUserId">
+    </form>
+        foreach(Comment aComment in @ViewBag.myCommentsList)
+        {
+
+            DateTime createdCommentDate = @aComment.Created_At; 
+            DateTime commentRightNow = DateTime.Now;
+            TimeSpan commentSpan = (commentRightNow - createdCommentDate);
+
+            if(@aComment.MessageId == @aMessage.MessageId)
+            {
+                    if(@commentSpan.Days < 1)
+    {
+                        if(@commentSpan.Hours < 1 && commentSpan.Minutes >= 1)
+                        {
+                            <p><h3> @commentSpan.Minutes minutes ago</h3></p>  
+                        }
+                        else
+                        {
+                                <p><h3> Just Now </h3></p> 
+                        }
+                    }
+                    else 
+                    {
+                    <p> @aComment.Created_At.ToString("MMM dd yyyy") </p>
+                    }
+                <p><a href = "/users/show/@aMessage.UserId">@aComment.User.FirstName </a><span style = "color:green">commented </span> on message </p> 
+                <p> @aComment.CommentConversation</p>
+            
+                }
+            }
+
+        }
+     }
+ }
+
+ }

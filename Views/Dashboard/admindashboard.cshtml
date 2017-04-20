@@ -1,0 +1,27 @@
+@{
+    @using Dashboard.Models;
+}
+<h1> Admin Dashboard </h1> 
+<hr> 
+<button onclick="location.href = '/users/new'">Add new </button>
+<table>
+    <tr>
+        <th> ID </th>
+        <th> Name </th>
+        <th> email </th>
+        <th> created_at </th>
+        <th> user_level </th>
+        <th> actions </th>
+    </tr> 
+    @foreach(User aUser in @ViewBag.myUserList)
+    {
+        <tr>
+            <td> @aUser.UserId </td>
+            <td><a href = "/users/show/@aUser.UserId">@aUser.FirstName @aUser.LastName</a></td>
+            <td>@aUser.Email </td>
+            <td>@aUser.Created_At </td>
+            <td>@aUser.App_Level </td>
+            <td><a href ="users/edit/@aUser.UserId">edit</a>  <a id = "remove" href="/remove/@aUser.UserId" onclick="return confirm('Are you sure?')">remove </a> </td>
+        </tr>
+    }
+</table>

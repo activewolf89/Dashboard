@@ -1,0 +1,56 @@
+@{
+    @using Dashboard.Models;
+}
+@model Dashboard.Models.UserViewValidation
+
+<h1> Welcome to the Edit </h1>
+
+<fieldset id = "edit_information">
+
+    <legend> Edit Information </legend>
+     <form method = "post" action = "/editinformation/@ViewBag.singleUser.UserId">
+        <label>Email</label>
+        <input type = "text" name = "incEmail" value = @ViewBag.singleUser.Email> </input>
+    
+        <label>FirstName</label>
+        <input type = "text" name = "incFirstName" value = @ViewBag.singleUser.FirstName></input>
+        
+        <label>LastName</label>
+        <input type = "text" name = "incLastName" value = @ViewBag.singleUser.LastName></input>
+
+        <input type ="hidden" name = "incId" value = @ViewBag.singleUser.UserId></input>
+        @if ((bool)ViewData["Allow"])
+        {
+        <label>User Level</label>
+            <select name = "Allowance">
+                <option> Normal </option> 
+                <option> Admin </option> 
+            </select>
+        }
+
+        <button type="submit">Save</button>
+    </form>
+
+</fieldset>
+<fieldset id = "change_password">
+    <form action = "/editpassword" method="post">
+        <legend> Change Password </legend>
+        <label>Password</label>
+        <input type = "password" name = "password">
+
+        <label>Password Confirmaton</label>
+        <input type = "password" name = "confirmpassword"></input>
+        <input name = "incId" type ="hidden" value = @ViewBag.singleUser.UserId></input>
+        <button type="submit"> Update Password </button>
+    </form>
+</fieldset>
+
+<fieldset id = "edit_description">
+    <form action = "/editdescription" method="post">
+        <legend> Edit Description </legend> 
+        <textarea id="myTextArea" name="myTextArea" >@ViewBag.singleUser.Description</textarea>
+        <input name = "incId" type ="hidden" value = @ViewBag.singleUser.UserId></input>
+         <button type="submit"> Description </button>
+    </form>
+</fieldset>
+<h2>  @ViewData["success"]</h2>
